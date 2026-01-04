@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Youssef Mohamed | AI Engineer Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --accent: #ec4899;
+  --dark: #0f172a;
+  --darker: #020617;
+  --light: #f8fafc;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--darker);
+  color: var(--light);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated Background */
+.bg-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-animation::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+  animation: bgFloat 20s ease-in-out infinite;
+}
+
+.bg-animation::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(0deg, 
+    transparent 0px, 
+    transparent 2px, 
+    rgba(99, 102, 241, 0.03) 2px, 
+    rgba(99, 102, 241, 0.03) 4px);
+}
+
+@keyframes bgFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Floating Particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: float 15s infinite;
+}
+
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; }
+.particle:nth-child(3) { left: 60%; top: 10%; animation-delay: 4s; }
+.particle:nth-child(4) { left: 80%; top: 60%; animation-delay: 6s; }
+.particle:nth-child(5) { left: 40%; top: 40%; animation-delay: 8s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  50% { transform: translateY(-100px) translateX(50px); opacity: 1; }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glassmorphism Header */
+header {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 100px 60px;
+  text-align: center;
+  border-radius: 30px;
+  margin: 40px 0 60px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(99, 102, 241, 0) 0deg,
+    rgba(99, 102, 241, 0.3) 90deg,
+    rgba(139, 92, 246, 0.3) 180deg,
+    rgba(236, 72, 153, 0.3) 270deg,
+    rgba(99, 102, 241, 0) 360deg
+  );
+  animation: headerRotate 20s linear infinite;
+}
+
+@keyframes headerRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 28px;
+  z-index: 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+header h1 {
+  font-size: 72px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #6366f1 50%, #ec4899 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  animation: gradientFlow 3s ease infinite, textFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes textFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+}
+
+.subtitle {
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.contact-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.contact-item {
+  padding: 12px 24px;
+  background: rgba(99, 102, 241, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+}
+
+.contact-item a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 25px;
+  padding: 50px;
+  margin-bottom: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(99, 102, 241, 0.1), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.glass-card:hover::before {
+  left: 100%;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 50px;
+  background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+  letter-spacing: -1px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+
+.intro-text {
+  font-size: 20px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.skill-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 40px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+}
+
+.skill-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card ul {
+  list-style: none;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card ul li {
+  padding: 12px 0;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 30px;
+  position: relative;
+  font-weight: 400;
+  transition: all 0.3s;
+}
+
+.skill-card ul li:hover {
+  color: #fff;
+  padding-left: 40px;
+}
+
+.skill-card ul li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 20px;
+  transition: all 0.3s;
+}
+
+.skill-card ul li:hover::before {
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+/* Projects */
+.projects-grid {
+  display: grid;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.project-card {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 45px;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  transform: scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom;
+}
+
+.project-card:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.project-card:hover {
+  transform: translateX(10px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+}
+
+.project-number {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 100px;
+  font-weight: 900;
+  color: rgba(99, 102, 241, 0.1);
+  line-height: 1;
+  user-select: none;
+}
+
+.project-card h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.tool-tag {
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s;
+}
+
+.tool-tag:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.4));
+  transform: translateY(-2px);
+}
+
+/* Awards */
+.awards-grid {
+  display: grid;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.award-card {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.award-card:hover {
+  transform: translateX(10px);
+  border-color: rgba(236, 72, 153, 0.6);
+  box-shadow: 0 15px 50px rgba(236, 72, 153, 0.2);
+}
+
+.award-icon {
+  font-size: 50px;
+  min-width: 60px;
+  filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.5));
+}
+
+.award-text {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 80px 60px;
+  text-align: center;
+  border-radius: 30px;
+  margin: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  animation: ctaPulse 10s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section h2 {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-section p {
+  font-size: 22px;
+  margin-bottom: 45px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 18px 50px;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 30px 30px 0 0;
+  padding: 50px 40px;
+  text-align: center;
+  margin-top: 80px;
+}
+
+footer p {
+  margin: 12px 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+}
+
+footer strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 42px;
+  }
+  
+  .subtitle {
+    font-size: 20px;
+  }
+  
+  .section-title {
+    font-size: 36px;
+  }
+  
+  .glass-card {
+    padding: 30px;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-section h2 {
+    font-size: 36px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="bg-animation">
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<div class="container">
+  <header>
+    <div class="header-content">
+      <h1>Youssef Mohamed Hussain</h1>
+      <div class="subtitle">
+        Data Analyst & <span class="highlight">Machine Learning</span> / <span class="highlight">AI Engineer</span>
+      </div>
+      <div class="contact-bar">
+        <div class="contact-item">
+          <span>📍 Mansoura, Egypt</span>
+        </div>
+        <div class="contact-item">
+          <a href="mailto:youssefkormed1@gmail.com">📧 Email</a>
+        </div>
+        <div class="contact-item">
+          <a href="tel:01559053143">📱 01559053143</a>
+        </div>
+        <div class="contact-item">
+          <a href="https://linkedin.com/in/youssef-mohamed" target="_blank">💼 LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="glass-card">
+    <h2 class="section-title">Professional Profile</h2>
+    <p class="intro-text">
+      Data analyst and AI specialist with expertise in Machine Learning, experienced in extracting and analyzing data to transform it into actionable insights using Python, SQL, Excel, and Power BI. I develop AI models to deliver innovative solutions that enhance decision-making and improve performance. Currently working at <strong style="color: var(--accent);">Pari AI Company</strong>.
+    </p>
+  </div>
+
+  <section class="glass-card">
+    <h2 class="section-title">Core Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>💻 Programming Languages</h3>
+        <ul>
+          <li>Python</li>
+          <li>C++</li>
+          <li>SQL</li>
+          <li>R</li>
+        </ul>
+      </div>
+      
+      <div class="skill-card">
+        <h3>📊 Data Analysis Tools</h3>
+        <ul>
+          <li>Excel (Pivot Tables)</li>
+          <li>Power BI</li>
+          <li>Tableau</li>
+          <li>Statistical Analysis</li>
+        </ul>
+      </div>
+      
+      <div class="skill-card">
+        <h3>🤖 AI & Machine Learning</h3>
+        <ul>
+          <li>Machine Learning</li>
+          <li>Deep Learning</li>
+          <li>Model Development</li>
+          <li>AI Applications</li>
+        </ul>
+      </div>
+      
+      <div class="skill-card">
+        <h3>⚡ Additional Skills</h3>
+        <ul>
+          <li>Data Cleaning & Processing</li>
+          <li>Data Visualization</li>
+          <li>Dashboard Creation</li>
+          <li>Team Leadership</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-card">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-number">01</div>
+        <h3>Sales Analysis Project</h3>
+        <p>
+          Analyzed Q4 sales data using Excel, Pivot Tables, and Power Pivot. Built an interactive dashboard showcasing revenue and net profit. Identified high-performing regions and top-selling products. Delivered insights to optimize sales strategies.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Excel</span>
+          <span class="tool-tag">Pivot Tables</span>
+          <span class="tool-tag">Power Pivot</span>
+          <span class="tool-tag">Statistical Analysis</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-number">02</div>
+        <h3>Robo Scobe - AI Health Analysis Model</h3>
+        <p>
+          Developing a deep-learning model for comprehensive health analysis including skin, eye, scalp health assessment, and stress measurement. The project aims to provide holistic health insights using advanced AI techniques.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Deep Learning</span>
+          <span class="tool-tag">AI Model</span>
+          <span class="tool-tag">Health Analysis</span>
+          <span class="tool-tag">Computer Vision</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-number">03</div>
+        <h3>Smart Parking Management System</h3>
+        <p>
+          Designed a database to intelligently manage parking situations using AI techniques. The project won "Project of the Year" award for leading a smart vehicle development team.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Database Design</span>
+          <span class="tool-tag">Smart Systems</span>
+          <span class="tool-tag">AI</span>
+          <span class="tool-tag">IoT</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-number">04</div>
+        <h3>Smart Glasses for the Blind</h3>
+        <p>
+          Developed smart glasses to assist blind individuals in safe and easy navigation using AI and computer vision technologies. Implements real-time object detection and audio feedback systems.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Computer Vision</span>
+          <span class="tool-tag">AI</span>
+          <span class="tool-tag">Assistive Technology</span>
+          <span class="tool-tag">IoT</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-number">05</div>
+        <h3>Human Following Robot</h3>
+        <p>
+          Accurate tracking of human movement with intelligent interaction capabilities. The robot uses advanced technologies for motion tracking and smart engagement with real-time response systems.
+        </p>
+        <div class="project-tools">
+          <span class="tool-tag">Robotics</span>
+          <span class="tool-tag">AI</span>
+          <span class="tool-tag">Human Tracking</span>
+          <span class="tool-tag">Sensors</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-card">
+    <h2 class="section-title">Awards & Recognition</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <div class="award-icon">🏆</div>
+        <div class="award-text">
+          <strong>"Project of the Year" Award</strong> for leading a smart parking vehicle development team - New Mansoura University
+        </div>
+      </div>
+      
+      <div class="award-card">
+        <div class="award-icon">🥇</div>
+        <div class="award-text">
+          <strong>1st Place in Robots Castle Competition</strong> - Awarded by the Governor of Damietta
+        </div>
+      </div>
+      
+      <div class="award-card">
+        <div class="award-icon">🥈</div>
+        <div class="award-text">
+          <strong>2nd Place at Faculty Innovation Competition</strong> - New Mansoura University
+        </div>
+      </div>
+      
+      <div class="award-card">
+        <div class="award-icon">⭐</div>
+        <div class="award-text">
+          <strong>Recognized for delivering actionable insights</strong> in team settings and collaborative projects
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-card">
+    <h2 class="section-title">Education & Training</h2>
+    <div style="margin-bottom: 40px;">
+      <h3 style="color: #fff; font-size: 26px; margin-bottom: 20px; font-weight: 700;">🎓 Education</h3>
+      <p style="font-size: 20px; color: #fff; margin-bottom: 10px;"><strong>Faculty of Artificial Intelligence</strong></p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 8px;">Currently in third year, specializing in AI applications and development</p>
+      <p style="color: rgba(255, 255, 255, 0.6);">New Mansoura University | 2023 - 2027</p>
+      <p style="color: rgba(255, 255, 255, 0.6); margin-top: 15px; font-style: italic;">Gaining practical experience through real-world AI projects</p>
+    </div>
+    
+    <div>
+      <h3 style="color: #fff; font-size: 26px; margin-bottom: 20px; font-weight: 700;">📜 Professional Courses</h3>
+      <div style="display: grid; gap: 20px;">
+        <div style="padding: 20px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); border-radius: 15px; border-left: 4px solid var(--primary);">
+          <strong style="color: #fff; font-size: 18px;">Data Analysis</strong>
+          <p style="color: rgba(255, 255, 255, 0.7); margin-top: 8px;">DEPI (October 2024 - May 2025)</p>
+        </div>
+        <div style="padding: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border-radius: 15px; border-left: 4px solid var(--secondary);">
+          <strong style="color: #fff; font-size: 18px;">Machine Learning</strong>
+          <p style="color: rgba(255, 255, 255, 0.7); margin-top: 8px;">Professional Certificate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="cta-content">
+      <h2>Let's Work Together</h2>
+      <p>I'm available for Data Analysis and AI/ML projects<br>Let's transform your data into valuable insights!</p>
+      <div class="cta-buttons">
+        <a href="mailto:youssefkormed1@gmail.com" class="btn btn-primary">
+          <span>📧 Contact via Email</span>
+        </a>
+        <a href="https://wa.me/201559053143" target="_blank" class="btn btn-secondary">
+          <span>💬 WhatsApp</span>
+        </a>
+      </div>
+      <p style="margin-top: 45px; font-size: 18px; color: rgba(255, 255, 255, 0.8);">
+        💼 Currently working at <strong style="color: var(--accent);">Pari AI Company</strong>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong style="font-size: 20px;">Youssef Mohamed Hussain</strong></p>
+    <p style="font-size: 16px; margin-top: 10px;">Data Analyst & Machine Learning / AI Engineer</p>
+    <p style="margin-top: 25px; font-size: 15px;">Transforming data into actionable insights</p>
+    <p style="margin-top: 20px; opacity: 0.6;">📧 youssefkormed1@gmail.com | 📱 01559053143</p>
+  </footer>
+</div>
+</body>
+</html>
